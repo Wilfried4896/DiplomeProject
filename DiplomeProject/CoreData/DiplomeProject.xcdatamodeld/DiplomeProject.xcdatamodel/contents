@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Favories" representedClassName="Favories" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionFavorie" optional="YES" attributeType="String"/>
+        <attribute name="publishedAt" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="urlToImage" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="favorie" inverseEntity="User"/>
+    </entity>
+    <entity name="Gallery" representedClassName="Gallery" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="image" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Images" inverseName="gallery" inverseEntity="Images"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="gallery" inverseEntity="User"/>
+    </entity>
+    <entity name="Images" representedClassName="Images" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="gallery" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gallery" inverseName="image" inverseEntity="Gallery"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="photo" inverseEntity="User"/>
+    </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="imagePost" optional="YES" attributeType="Binary" valueTransformerName="" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="isFavorie" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="post" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="birthDay" optional="YES" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="occuption" optional="YES" attributeType="String"/>
+        <attribute name="profileImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="favorie" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Favories" inverseName="user" inverseEntity="Favories"/>
+        <relationship name="gallery" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gallery" inverseName="user" inverseEntity="Gallery"/>
+        <relationship name="photo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Images" inverseName="user" inverseEntity="Images"/>
+        <relationship name="post" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="user" inverseEntity="Post"/>
+    </entity>
+</model>
